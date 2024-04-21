@@ -1,10 +1,10 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
-import styled from "styled-components"
-import { Search } from 'styled-icons/feather'
+import styled , {ThemeConsumer} from "styled-components"
+import { Flex } from 'rebass'
 import { H1 } from "../Heading"
-import { IconButton } from '../Button'
+import {SearchButton} from '../Button'
 import { Section } from '../Section'
 
 const StyledHeader = styled.header`
@@ -13,27 +13,50 @@ const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
   background: ${({ theme }) => theme.variants.header.primary.backgroundColor};
 `
 
 const StyledLink = styled(Link)`
-  font-size: var(--font-sm);
   text-decoration: none;
+  margin: 0 10px;
   color: ${({ theme }) => theme.variants.header.primary.color};
 `
-
+const Image = styled.img`
+  margin: 0;
+`
+const Nav = styled(Flex)`
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+`
+const Title = styled(H1)`
+  flex: 4;
+`
+const MediaQuery = styled.div`
+  @media (max-width: 600px) {
+    display:none;
+  }
+`
 const Header = ({ siteTitle }) => (
   <StyledHeader>
-    <Section width={11/12}>
-      <StyledLink to="/">
-        <H1>
-          {siteTitle}
-        </H1>
-      </StyledLink>
-    </Section>
-    <Section width={1/12}>
-      <IconButton icon={<Search />} variant='contrast' />
+    <Section flex>
+      <Section width={1/12} flex flexDirection="column" justifyContent="center">
+      </Section>
+      <Section width={11/12} flex flexDirection="column" justifyContent="center">
+        <Nav>
+          <Title>
+            <StyledLink to="/">
+              {siteTitle}
+            </StyledLink>
+          </Title>
+          <MediaQuery>
+            <StyledLink to="/">Home</StyledLink>
+            <StyledLink to="/about">About</StyledLink>
+            <StyledLink to="/contact">Contact</StyledLink>
+          </MediaQuery>
+          <SearchButton variant='contrast' />
+        </Nav>
+      </Section>
     </Section>
   </StyledHeader>
 )
