@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
     <ThemeProvider theme={Gray}>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <Content>
-        <Main>{children}</Main>
+        <Main m={20}>{children}</Main>
         <Footer
           style={{
             marginTop: `var(--space-5)`,
